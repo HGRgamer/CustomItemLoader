@@ -22,12 +22,14 @@ use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\nbt\tag\ByteTag;
 use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\nbt\tag\DoubleTag;
 use pocketmine\nbt\tag\FloatTag;
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\nbt\tag\ListTag;
 use pocketmine\nbt\tag\ShortTag;
 use pocketmine\nbt\tag\StringTag;
 use ReflectionClass;
+use function var_dump;
 
 final class CustomItemProperties{
 	/** @var string */
@@ -102,6 +104,13 @@ final class CustomItemProperties{
 		$armor = isset($data["armor"]) ? $data["armor"] : false;
 		$defence_points = $data["defence_points"] ?? 0;
 
+		$imageWidth = $data["imageWidth"] ?? 16;
+		$imageHeight = $data["imageHeight"] ?? 16;
+
+		[$x, $y, $z] = $this->calculateOffsetSize($imageHeight, $imageWidth, (bool) $hand_equipped);
+
+		//var_dump($imageWidth, $imageHeight, $x, $y, $z);
+
 		$nbt = new CompoundTag("", [
 			new CompoundTag("components", [
 				new CompoundTag("minecraft:icon", [
@@ -118,59 +127,59 @@ final class CustomItemProperties{
 					new FloatTag("mining_speed", $mining_speed),
 					new ByteTag("animates_in_toolbar", 1),
 				]),
-				new CompoundTag("minecraft:render_offsets", [
+				new CompoundTag("render_offsets", [
 					new CompoundTag("main_hand", [
 						new CompoundTag("first_person", [
 							new ListTag("position", [
-								new FloatTag("", 0),
-								new FloatTag("", 0),
-								new FloatTag("", 0)
+								new DoubleTag("", 0),
+								new DoubleTag("", 0),
+								new DoubleTag("", 0)
 							]),
 							new ListTag("rotation", [
-								new FloatTag("", 0),
-								new FloatTag("", 0),
-								new FloatTag("", 0)
+								new DoubleTag("", 0),
+								new DoubleTag("", 0),
+								new DoubleTag("", 0)
 							]),
 							new ListTag("scale", [
-								new FloatTag("", 0.1),
-								new FloatTag("", 0.1),
-								new FloatTag("", 0.1)
+								new DoubleTag("", $x),
+								new DoubleTag("", $y),
+								new DoubleTag("", $z)
 							])
 						]),
 						new CompoundTag("third_person", [
 							new ListTag("position", [
-								new FloatTag("", 0),
-								new FloatTag("", 0),
-								new FloatTag("", 0)
+								new DoubleTag("", 0),
+								new DoubleTag("", 0),
+								new DoubleTag("", 0)
 							]),
 							new ListTag("rotation", [
-								new FloatTag("", 0),
-								new FloatTag("", 0),
-								new FloatTag("", 0)
+								new DoubleTag("", 0),
+								new DoubleTag("", 0),
+								new DoubleTag("", 0)
 							]),
 							new ListTag("scale", [
-								new FloatTag("", 0.1),
-								new FloatTag("", 0.1),
-								new FloatTag("", 0.1)
+								new DoubleTag("", $x),
+								new DoubleTag("", $y),
+								new DoubleTag("", $z)
 							])
 						])
 					]),
 					new CompoundTag("off_hand", [
 						new CompoundTag("first_person", [
 							new CompoundTag("position", [
-								new FloatTag("", 0),
-								new FloatTag("", 0),
-								new FloatTag("", 0)
+								new DoubleTag("", 0),
+								new DoubleTag("", 0),
+								new DoubleTag("", 0)
 							]),
 							new CompoundTag("rotation", [
-								new FloatTag("", 0),
-								new FloatTag("", 0),
-								new FloatTag("", 0)
+								new DoubleTag("", 0),
+								new DoubleTag("", 0),
+								new DoubleTag("", 0)
 							]),
 							new CompoundTag("scale", [
-								new FloatTag("", 0.1),
-								new FloatTag("", 0.1),
-								new FloatTag("", 0.1)
+								new DoubleTag("", $x),
+								new DoubleTag("", $y),
+								new DoubleTag("", $z)
 							])
 						]),
 					])
@@ -318,5 +327,27 @@ final class CustomItemProperties{
 		/** @var CustomItemProperties $newInstance */
 		$newInstance = $class->newInstanceWithoutConstructor();
 		return $newInstance;
+	}
+
+	/**
+	 * @param int $imageHeight
+	 * @param int $imageWidth
+	 * @param bool $handEquipped
+	 *
+	 * @return array
+	 */
+	private function calculateOffsetSize(int $imageHeight, int $imageWidth, bool $handEquipped = false) : array{
+		[$defaultX, $defaultY, $defaultZ] = [0.075, 0.125, 0.075];
+
+		if($handEquipped){
+			[$defaultX, $defaultY, $defaultZ] = [0.1, 0.1, 0.1];
+		}
+
+		$size = (int) ($imageHeight + $imageWidth / 2);
+
+		$x = $defaultX / ($size / 16);
+		$y = $defaultY / ($size / 16);
+		$z = $defaultZ / ($size / 16);
+		return [$x, $y, $z];
 	}
 }

@@ -126,62 +126,62 @@ final class CustomItemProperties{
 					new IntTag("max_stack_size", $max_stack_size),
 					new FloatTag("mining_speed", $mining_speed),
 					new ByteTag("animates_in_toolbar", 1),
-				]),
-				new CompoundTag("render_offsets", [
-					new CompoundTag("main_hand", [
-						new CompoundTag("first_person", [
-							new ListTag("position", [
-								new DoubleTag("", 0),
-								new DoubleTag("", 0),
-								new DoubleTag("", 0)
+					new CompoundTag("minecraft:render_offsets", [
+						new CompoundTag("main_hand", [
+							new CompoundTag("first_person", [
+								new ListTag("position", [
+									new DoubleTag("", 1),
+									new DoubleTag("", -0.05),
+									new DoubleTag("", -2.3)
+								]),
+								new ListTag("rotation", [
+									new DoubleTag("", 0),
+									new DoubleTag("", 0),
+									new DoubleTag("", 0)
+								]),
+								new ListTag("scale", [
+									new DoubleTag("", $x),
+									new DoubleTag("", $y),
+									new DoubleTag("", $z)
+								])
 							]),
-							new ListTag("rotation", [
-								new DoubleTag("", 0),
-								new DoubleTag("", 0),
-								new DoubleTag("", 0)
-							]),
-							new ListTag("scale", [
-								new DoubleTag("", $x),
-								new DoubleTag("", $y),
-								new DoubleTag("", $z)
+							new CompoundTag("third_person", [
+								new ListTag("position", [
+									new DoubleTag("", 0),
+									new DoubleTag("", 0),
+									new DoubleTag("", 0)
+								]),
+								new ListTag("rotation", [
+									new DoubleTag("", 0),
+									new DoubleTag("", 0),
+									new DoubleTag("", 0)
+								]),
+								new ListTag("scale", [
+									new DoubleTag("", $x),
+									new DoubleTag("", $y),
+									new DoubleTag("", $z)
+								])
 							])
 						]),
-						new CompoundTag("third_person", [
-							new ListTag("position", [
-								new DoubleTag("", 0),
-								new DoubleTag("", 0),
-								new DoubleTag("", 0)
+						new CompoundTag("off_hand", [
+							new CompoundTag("first_person", [
+								new CompoundTag("position", [
+									new DoubleTag("", 0),
+									new DoubleTag("", 0),
+									new DoubleTag("", 0)
+								]),
+								new CompoundTag("rotation", [
+									new DoubleTag("", 90),
+									new DoubleTag("", 45),
+									new DoubleTag("", 0)
+								]),
+								new CompoundTag("scale", [
+									new DoubleTag("", $x),
+									new DoubleTag("", $y),
+									new DoubleTag("", $z)
+								])
 							]),
-							new ListTag("rotation", [
-								new DoubleTag("", 0),
-								new DoubleTag("", 0),
-								new DoubleTag("", 0)
-							]),
-							new ListTag("scale", [
-								new DoubleTag("", $x),
-								new DoubleTag("", $y),
-								new DoubleTag("", $z)
-							])
 						])
-					]),
-					new CompoundTag("off_hand", [
-						new CompoundTag("first_person", [
-							new CompoundTag("position", [
-								new DoubleTag("", 0),
-								new DoubleTag("", 0),
-								new DoubleTag("", 0)
-							]),
-							new CompoundTag("rotation", [
-								new DoubleTag("", 0),
-								new DoubleTag("", 0),
-								new DoubleTag("", 0)
-							]),
-							new CompoundTag("scale", [
-								new DoubleTag("", $x),
-								new DoubleTag("", $y),
-								new DoubleTag("", $z)
-							])
-						]),
 					])
 				])
 			]),

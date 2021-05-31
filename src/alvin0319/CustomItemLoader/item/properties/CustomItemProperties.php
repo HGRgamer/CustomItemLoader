@@ -29,7 +29,6 @@ use pocketmine\nbt\tag\ListTag;
 use pocketmine\nbt\tag\ShortTag;
 use pocketmine\nbt\tag\StringTag;
 use ReflectionClass;
-use function var_dump;
 
 final class CustomItemProperties{
 	/** @var string */
@@ -330,8 +329,8 @@ final class CustomItemProperties{
 	}
 
 	/**
-	 * @param int $imageHeight
-	 * @param int $imageWidth
+	 * @param int  $imageHeight
+	 * @param int  $imageWidth
 	 * @param bool $handEquipped
 	 *
 	 * @return array

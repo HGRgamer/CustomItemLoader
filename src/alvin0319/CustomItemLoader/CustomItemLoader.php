@@ -22,6 +22,7 @@ use alvin0319\CustomItemLoader\command\ResourcePackCreateCommand;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\server\DataPacketSendEvent;
+use pocketmine\network\mcpe\protocol\ResourcePackStackPacket;
 use pocketmine\network\mcpe\protocol\StartGamePacket;
 use pocketmine\network\mcpe\protocol\types\Experiments;
 use pocketmine\plugin\PluginBase;
@@ -62,8 +63,13 @@ class CustomItemLoader extends PluginBase implements Listener{
 	public function onDataPacketSend(DataPacketSendEvent $event) : void{
 		$packet = $event->getPacket();
 		if($packet instanceof StartGamePacket){
-			$packet->experiments = new Experiments([], true);
-			$packet->experimentalGameplayOverride = true;
+			$packet->experiments = new Experiments([
+				"data_driven_items" => true
+			], true);
+		}elseif($packet instanceof ResourcePackStackPacket){
+			$packet->experiments = new Experiments([
+				"data_driven_items" => true
+			], true);
 		}
 	}
 }

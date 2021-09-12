@@ -40,12 +40,10 @@ use ReflectionClass;
 use ReflectionProperty;
 
 final class CustomItemManager{
-	use SingletonTrait {
-		getInstance as getInstance_; // FIXME: This will valid when IntelliJ fixes singleton bug
-	}
+	use SingletonTrait;
 
 	public static function getInstance() : CustomItemManager{
-		return self::getInstance_();
+		return self::$instance;
 	}
 
 	/** @var Item[] */

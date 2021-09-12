@@ -99,6 +99,8 @@ final class CustomItemProperties{
 		$hand_equipped = (int) ($data["hand_equipped"] ?? true);
 		$max_stack_size = (int) ($data["max_stack_size"] ?? 64);
 		$mining_speed = (float) ($data["mining_speed"] ?? 1);
+		$foil = (bool) ($data["foil"] ?? false);
+		$mirrored_art = (bool) ($data["mirrored_art"] ?? false);
 
 		$food = (int) ($data["food"] ?? false);
 		$can_always_eat = (int) ($data["can_always_eat"] ?? false);
@@ -129,6 +131,8 @@ final class CustomItemProperties{
 					->setByte("hand_equipped", $hand_equipped)
 					->setInt("max_stack_size", $max_stack_size)
 					->setFloat("mining_speed", $mining_speed)
+					->setByte("foil", $foil ? 1 : 0)
+					->setByte("mirrored_art", $mirrored_art ? 1 : 0)
 				)
 				->setTag("minecraft:icon", CompoundTag::create()
 					->setString("texture", $data["texture"])

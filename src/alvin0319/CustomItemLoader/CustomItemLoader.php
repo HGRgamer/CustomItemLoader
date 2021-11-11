@@ -46,9 +46,6 @@ class CustomItemLoader extends PluginBase implements Listener{
 		}
 
 		$this->getServer()->getCommandMap()->register("customitemloader", new ResourcePackCreateCommand());
-
-		CustomItemManager::reset();
-		CustomItemManager::getInstance()->registerDefaultItems($this->getConfig()->get("items", []));
 	}
 
 	public function getResourcePackFolder() : string{
@@ -57,7 +54,7 @@ class CustomItemLoader extends PluginBase implements Listener{
 
 	public function onPlayerJoin(PlayerJoinEvent $event) : void{
 		$player = $event->getPlayer();
-		$player->getNetworkSession()->sendDataPacket(CustomItemManager::getInstance()->getPacket());
+		//$player->getNetworkSession()->sendDataPacket(CustomItemManager::getInstance()->getPacket());
 	}
 
 	public function onDataPacketSend(DataPacketSendEvent $event) : void{
